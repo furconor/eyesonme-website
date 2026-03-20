@@ -3,287 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EyesOnMe - Destek</title>
-    <!-- Modern Gradient ve Fontlar için Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
-    
+    <title>EyesOnMe - Destek / Support</title>
     <style>
-        :root {
-            --bg-color: #050505;
-            --surface-color: rgba(25, 25, 30, 0.6);
-            --primary-gradient: linear-gradient(135deg, #FF3366 0%, #9933FF 100%);
-            --text-main: #FFFFFF;
-            --text-muted: #A0A0A0;
-            --glass-border: rgba(255, 255, 255, 0.08);
-            --accent-glow: rgba(153, 51, 255, 0.3);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Outfit', sans-serif;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            overflow-x: hidden;
-            position: relative;
-        }
-
-        /* Arka plan animasyonlu Glow Efektleri */
-        .glow-circle-1 {
-            position: absolute;
-            top: -10%;
-            left: -10%;
-            width: 50vw;
-            height: 50vw;
-            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
-            z-index: -1;
-            filter: blur(80px);
-            animation: float 10s infinite alternate ease-in-out;
-        }
-
-        .glow-circle-2 {
-            position: absolute;
-            bottom: -20%;
-            right: -10%;
-            width: 60vw;
-            height: 60vw;
-            background: radial-gradient(circle, rgba(255, 51, 102, 0.15) 0%, transparent 70%);
-            z-index: -1;
-            filter: blur(100px);
-            animation: float 12s infinite alternate-reverse ease-in-out;
-        }
-
-        @keyframes float {
-            0% { transform: translateY(0) scale(1); }
-            100% { transform: translateY(30px) scale(1.1); }
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 4rem 2rem;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        header {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-
-        .logo-text {
-            font-size: 3.5rem;
-            font-weight: 800;
-            background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 1rem;
-            letter-spacing: -1px;
-        }
-
-        .subtitle {
-            font-size: 1.2rem;
-            color: var(--text-muted);
-            font-weight: 300;
-        }
-
-        .glass-card {
-            background: var(--surface-color);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 24px;
-            padding: 3rem;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .glass-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-        }
-
-        .section-title {
-            font-size: 1.8rem;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .section-title::before {
-            content: '';
-            display: block;
-            width: 8px;
-            height: 24px;
-            background: var(--primary-gradient);
-            border-radius: 4px;
-        }
-
-        .content-block {
-            margin-bottom: 2.5rem;
-        }
-
-        .content-block p {
-            color: var(--text-muted);
-            line-height: 1.7;
-            margin-bottom: 1rem;
-            font-size: 1.1rem;
-        }
-
-        .contact-box {
-            background: rgba(0, 0, 0, 0.4);
-            border-radius: 16px;
-            padding: 1.5rem;
-            margin-top: 1rem;
-            border: 1px solid var(--glass-border);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .email-address {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #fff;
-            letter-spacing: 0.5px;
-        }
-
-        .btn {
-            background: var(--primary-gradient);
-            color: white;
-            text-decoration: none;
-            padding: 12px 24px;
-            border-radius: 30px;
-            font-weight: 600;
-            font-size: 1rem;
-            transition: opacity 0.3s, transform 0.2s;
-            display: inline-block;
-            border: none;
-            cursor: pointer;
-        }
-
-        .btn:hover {
-            opacity: 0.9;
-            transform: scale(1.05);
-        }
-
-        .faq-item {
-            border-bottom: 1px solid var(--glass-border);
-            padding: 1.5rem 0;
-        }
-
-        .faq-item:last-child {
-            border-bottom: none;
-            padding-bottom: 0;
-        }
-
-        .faq-question {
-            font-weight: 600;
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-            color: #fff;
-        }
-
-        .faq-answer {
-            color: var(--text-muted);
-            line-height: 1.6;
-        }
-
-        footer {
-            text-align: center;
-            padding: 2rem;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            border-top: 1px solid var(--glass-border);
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(10px);
-        }
-
-        @media (max-width: 768px) {
-            .glass-card {
-                padding: 2rem;
-            }
-            .logo-text {
-                font-size: 2.8rem;
-            }
-            .contact-box {
-                flex-direction: column;
-                gap: 1rem;
-                text-align: center;
-            }
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: #050507; color: #F0EDE8; font-family: 'Segoe UI', system-ui, sans-serif; line-height: 1.7; }
+        .container { max-width: 720px; margin: 0 auto; padding: 40px 24px; }
+        h1 { color: #E8C97A; font-size: 28px; font-weight: 300; margin-bottom: 8px; letter-spacing: 2px; }
+        h2 { color: #E8C97A; font-size: 20px; font-weight: 400; margin: 32px 0 16px; border-bottom: 1px solid rgba(255,255,255,0.07); padding-bottom: 8px; }
+        h3 { color: #C4A55A; font-size: 15px; margin: 20px 0 8px; }
+        p, li { color: #9896A4; font-size: 14px; margin-bottom: 12px; }
+        ul { padding-left: 20px; }
+        .subtitle { color: #6B6878; font-size: 12px; letter-spacing: 1px; margin-bottom: 32px; }
+        .section { background: #1A1A24; border: 1px solid rgba(255,255,255,0.07); border-radius: 14px; padding: 24px; margin-bottom: 24px; }
+        .lang-switch { display: flex; gap: 8px; margin-bottom: 24px; }
+        .lang-btn { padding: 6px 14px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.07); background: #1A1A24; color: #6B6878; cursor: pointer; font-size: 12px; font-weight: bold; }
+        .lang-btn.active { background: #E8C97A; color: #0A0800; border-color: #E8C97A; }
+        .hidden { display: none; }
+        .updated { color: #6B6878; font-size: 11px; margin-top: 24px; font-style: italic; }
+        a { color: #E8C97A; }
     </style>
 </head>
 <body>
-
-    <div class="glow-circle-1"></div>
-    <div class="glow-circle-2"></div>
-
     <div class="container">
-        <header>
-            <h1 class="logo-text">EyesOnMe</h1>
-            <p class="subtitle">Her Zaman Yanınızdayız - Uygulama Destek Merkezi</p>
-        </header>
+        <div style="text-align:center; font-size: 48px; margin-bottom: 16px;">👁</div>
+        <h1 style="text-align:center;">EyesOnMe</h1>
+        <p class="subtitle" style="text-align:center;">DESTEK MERKEZİ / SUPPORT CENTER</p>
 
-        <div class="glass-card">
-            
-            <div class="content-block">
-                <h2 class="section-title">Bize Ulaşın</h2>
-                <p>EyesOnMe uygulamasını kullanırken bir sorun mu yaşıyorsunuz? Hesabınızla ilgili yardıma mı ihtiyacınız var? Destek ekibimiz sorularınızı yanıtlamak için burada.</p>
+        <div class="lang-switch">
+            <button class="lang-btn active" onclick="switchLang('tr')" id="btn-tr">Türkçe</button>
+            <button class="lang-btn" onclick="switchLang('en')" id="btn-en">English</button>
+        </div>
+
+        <!-- TURKISH -->
+        <div id="content-tr">
+            <div class="section">
+                <h2>Destek İletişim</h2>
+                <p>Uygulama ile ilgili yaşadığınız herhangi bir sorun, öneri veya geri bildirim için aşağıdaki e-posta adresi üzerinden bizimle iletişime geçebilirsiniz.</p>
+                <p><strong>Destek E-posta:</strong> <a href="mailto:eyesonmecorp@gmail.com">eyesonmecorp@gmail.com</a></p>
                 
-                <div class="contact-box">
-                    <div>
-                        <div style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 4px;">E-posta ile Destek</div>
-                        <div class="email-address">eyesonmecorp@gmail.com</div>
-                    </div>
-                    <a href="mailto:destek@eyesonme.space" class="btn">E-posta Gönder</a>
-                </div>
+                <h3>Sıkça Sorulan Sorular (SSS)</h3>
+                <p><strong>S: Hesabımı nasıl silebilirim?</strong><br>
+                C: Uygulama içerisinde Profil -> Ayarlar (Settings) -> Hesabı Sil (Delete Account) adımlarını izleyerek hesabınızı tamamen silebilirsiniz. Ayrıca yukarıdaki e-posta adresi üzerinden de hesap silme talebinde bulunabilirsiniz.</p>
+
+                <p><strong>S: Kötüye kullanım (Taciz, rahatsızlık vb.) durumunda ne yapmalıyım?</strong><br>
+                C: İlgili kullanıcının profiline giderek "Report" (Bildir) veya "Block" (Engelle) butonlarını kullanabilirsiniz. Bildirilen kullanıcılar ekibimiz tarafından 24 saat içerisinde incelenir.</p>
+
+                <p><strong>S: Konum bilgilerim güvende mi?</strong><br>
+                C: Evet, uygulama sizin güvenliğinizi ön planda tutar. Daha fazla detay için Gizlilik Politikamızı inceleyebilirsiniz.</p>
+
+                <p class="updated">Son güncelleme: Mart 2026</p>
             </div>
+        </div>
 
-            <div class="content-block" style="margin-top: 4rem;">
-                <h2 class="section-title">Sıkça Sorulan Sorular</h2>
-                
-                <div class="faq-item">
-                    <div class="faq-question">Hesabımı nasıl silebilirim?</div>
-                    <div class="faq-answer">Uygulama içerisindeki "Ayarlar" > "Gizlilik ve Güvenlik" menüsüne giderek hesabınızı kalıcı olarak silebilirsiniz. Ayrıca verilerinizin silinmesi için destek e-posta adresimize talebinizi iletebilirsiniz.</div>
-                </div>
+        <!-- ENGLISH -->
+        <div id="content-en" class="hidden">
+            <div class="section">
+                <h2>Support & Contact</h2>
+                <p>If you have any issues, suggestions, or feedback regarding the application, you can contact us via the email address below.</p>
+                <p><strong>Support Email:</strong> <a href="mailto:eyesonmecorp@gmail.com">eyesonmecorp@gmail.com</a></p>
 
-                <div class="faq-item">
-                    <div class="faq-question">Uygunsuz bir içeriği veya kullanıcıyı nasıl şikayet edebilirim?</div>
-                    <div class="faq-answer">EyesOnMe sıfır tolerans politikası (Zero Tolerance Policy) uygular. Bir gönderinin sağ üst köşesindeki "Üç Nokta" ikonuna tıklayıp "Şikayet Et" seçeneğini kullanarak veya doğrudan kullanıcı profili üzerinden şikayet edebilirsiniz. Ekiplerimiz 24 saat içerisinde müdahale edecektir.</div>
-                </div>
+                <h3>Frequently Asked Questions (FAQ)</h3>
+                <p><strong>Q: How can I delete my account?</strong><br>
+                A: You can permanently delete your account by following Profile -> Settings -> Delete Account inside the app. Alternatively, you can request account deletion by emailing us at the address above.</p>
 
-                <div class="faq-item">
-                    <div class="faq-question">Kamera veya Mikrofon sorunu yaşıyorum.</div>
-                    <div class="faq-answer">Lütfen cihazınızın "Ayarlar" > "EyesOnMe" menüsüne giderek Kamera ve Mikrofon izinlerinin açık olduğundan emin olun. İzinler açık olduğu halde sorun yaşıyorsanız uygulamayı silip yeniden yüklemeyi deneyin.</div>
-                </div>
+                <p><strong>Q: What should I do in case of abuse (harassment, etc.)?</strong><br>
+                A: You can use the "Report" or "Block" buttons on the relevant user's profile. Reported users will be reviewed by our team within 24 hours.</p>
+
+                <p><strong>Q: Is my location information safe?</strong><br>
+                A: Yes, the application prioritizes your safety. For more details, you can review our Privacy Policy.</p>
+
+                <p class="updated">Last updated: March 2026</p>
             </div>
-
         </div>
     </div>
 
-    <footer>
-        <p>&copy; 2026 EyesOnMe. Tüm hakları saklıdır.</p>
-        <div style="margin-top: 10px; gap: 15px; display: flex; justify-content: center;">
-            <a href="PRIVACY_POLICY.html" style="color: var(--text-muted); text-decoration: none;">Gizlilik Politikası</a>
-            <span>|</span>
-            <a href="CHILD_SAFETY_STANDARDS.html" style="color: var(--text-muted); text-decoration: none;">Güvenlik Standartları</a>
-        </div>
-    </footer>
-
+    <script>
+        function switchLang(lang) {
+            document.getElementById('content-tr').classList.toggle('hidden', lang !== 'tr');
+            document.getElementById('content-en').classList.toggle('hidden', lang !== 'en');
+            document.getElementById('btn-tr').classList.toggle('active', lang === 'tr');
+            document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+        }
+    </script>
 </body>
 </html>
