@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EyesOnMe Eosystem</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            font-family: 'Outfit', sans-serif;
+            background-color: #050507;
+        }
+
+        .split-container {
+            display: flex;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        /* Base styles for both sides */
+        .split {
+            position: relative;
+            height: 100%;
+            flex: 1; /* Both sides take 50% cleanly */
+            transition: flex 0.6s cubic-bezier(0.25, 1, 0.5, 1), filter 0.6s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            overflow: hidden;
+            text-decoration: none;
+        }
+
+        /* Hover effect: Expand hovered, shrink the other */
+        .split-container:hover .split:hover {
+            flex: 1.5;
+        }
+
+        .split-container:hover .split:not(:hover) {
+            flex: 0.8;
+            filter: grayscale(80%) brightness(0.6);
+        }
+
+        /* Left side - EyesOnMe */
+        .left {
+            background: linear-gradient(135deg, rgba(20,20,30,0.9), rgba(15,10,25,0.9)), url('https://images.unsplash.com/photo-1511632765486-a01980e01a18?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+            border-right: 1px solid rgba(232, 201, 122, 0.2);
+        }
+
+        /* Right side - EyesOnCampus */
+        .right {
+            background: linear-gradient(135deg, rgba(20,25,40,0.9), rgba(10,15,30,0.9)), url('https://images.unsplash.com/photo-1541339907198-e08756dedf3f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+            border-left: 1px solid rgba(232, 201, 122, 0.2);
+        }
+
+        /* Overlays for dark, rich feeling */
+        .split::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, transparent 0%, rgba(5,5,7,0.8) 100%);
+            z-index: 1;
+        }
+
+        /* Content Container */
+        .content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 40px;
+            background: rgba(26, 26, 36, 0.4);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.1);
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), background 0.6s ease;
+            max-width: 80%;
+        }
+
+        .split:hover .content {
+            transform: scale(1.05);
+            background: rgba(26, 26, 36, 0.6);
+            border-color: rgba(232, 201, 122, 0.3);
+            box-shadow: 0 40px 80px rgba(232, 201, 122, 0.1), inset 0 1px 0 rgba(255,255,255,0.2);
+        }
+
+        /* Typography */
+        h1 {
+            color: #E8C97A; /* Gold Accent */
+            font-size: clamp(2rem, 4vw, 4rem);
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        p {
+            color: #cccbdf;
+            font-size: clamp(1rem, 1.5vw, 1.25rem);
+            font-weight: 300;
+            margin-bottom: 24px;
+            letter-spacing: 1px;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 12px 32px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #0A0800;
+            background: #E8C97A;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(232, 201, 122, 0.2);
+        }
+
+        .split:hover .btn {
+            background: #fdf1cd;
+            box-shadow: 0 15px 30px rgba(232, 201, 122, 0.4);
+            transform: translateY(-2px);
+        }
+
+        /* Center Eye Logo Indicator */
+        .center-logo {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 70px;
+            height: 70px;
+            background: #E8C97A;
+            border-radius: 50%;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            box-shadow: 0 0 40px rgba(232, 201, 122, 0.5), 0 0 0 10px rgba(5,5,7,0.8);
+            pointer-events: none;
+            transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        /* Mobile View (Stack vertically) */
+        @media (max-width: 768px) {
+            .split-container {
+                flex-direction: column;
+            }
+            .split {
+                width: 100%;
+            }
+            .split-container:hover .split:hover {
+                flex: 1.5;
+            }
+            .split-container:hover .split:not(:hover) {
+                flex: 1;
+            }
+            .left {
+                border-right: none;
+                border-bottom: 1px solid rgba(232, 201, 122, 0.2);
+            }
+            .right {
+                border-left: none;
+                border-top: 1px solid rgba(232, 201, 122, 0.2);
+            }
+            h1 { font-size: 2.5rem; }
+            .center-logo {
+                width: 60px; height: 60px; font-size: 26px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="center-logo">👁</div>
+
+    <div class="split-container">
+        
+        <!-- EYES ON ME -->
+        <a href="eyesonme.html" class="split left">
+            <div class="content">
+                <h1>EyesOnMe</h1>
+                <p>Premium Dating & Social App</p>
+                <div class="btn">Keşfet</div>
+            </div>
+        </a>
+
+        <!-- EYES ON CAMPUS -->
+        <a href="eyesonmecampus.html" class="split right">
+            <div class="content">
+                <h1>EyesOnCampus</h1>
+                <p>Üniversite Buluşma Uygulaması</p>
+                <div class="btn">Giriş Yap</div>
+            </div>
+        </a>
+
+    </div>
+
+</body>
+</html>
