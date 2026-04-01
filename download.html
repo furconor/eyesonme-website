@@ -41,20 +41,24 @@
         .store-button:hover {
             transform: translateY(-2px);
             border-color: #FF3366;
+            background: #0a0a0a;
         }
 
         .store-button.highlight {
             border-color: #FF3366;
-            box-shadow: 0 0 20px rgba(255, 51, 102, 0.2);
+            background: rgba(255, 51, 102, 0.05);
+            box-shadow: 0 5px 15px rgba(255, 51, 102, 0.1);
         }
 
-        .icon { width: 30px; height: 30px; flex-shrink: 0; fill: #fff; }
+        /* İkonlar artık CDN üzerinden çekiliyor (Bozulması imkansız) */
+        .icon-img { width: 30px; height: 30px; flex-shrink: 0; }
+        
         .button-text-container { text-align: left; }
         .button-subtitle { display: block; font-size: 0.65rem; font-weight: 500; opacity: 0.6; text-transform: uppercase; margin-bottom: -1px; }
-        .button-text { display: block; font-size: 1.15rem; font-weight: 700; }
+        .button-text { display: block; font-size: 1.15rem; font-weight: 700; color: #fff; }
 
         footer { position: absolute; bottom: 1.5rem; font-size: 0.8rem; color: var(--text-muted); }
-        #detect-msg { margin-top: 1.2rem; font-size: 0.85rem; color: #FF3366; font-weight: 600; opacity: 0; transition: opacity 0.5s; }
+        #detect-msg { margin-top: 1.2rem; font-size: 0.85rem; color: #FF3366; font-weight: 600; opacity: 1; text-align: center; }
     </style>
 </head>
 <body>
@@ -71,10 +75,7 @@
         <div class="links-container">
             <!-- App Store -->
             <a href="https://apps.apple.com/tr/app/eyesonme/id6759520834?l=tr" id="ios-link" class="store-button">
-                <!-- KUSURSUZ APPLE LOGOSU -->
-                <svg class="icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.66.806-3.522 1.818-.753.869-1.414 2.336-1.231 3.712 1.348.104 2.684-.738 3.508-1.7z"/>
-                </svg>
+                <img src="https://cdn.simpleicons.org/apple/white" class="icon-img" alt="App Store">
                 <div class="button-text-container">
                     <span class="button-subtitle">Download on the</span>
                     <span class="button-text">App Store</span>
@@ -83,18 +84,15 @@
 
             <!-- Google Play -->
             <a href="https://play.google.com/store/apps/details?id=space.eyesonme.eyesonme" id="android-link" class="store-button">
-                <!-- KUSURSUZ PLAY STORE LOGOSU -->
-                <svg class="icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M17.523 15.308L14.594 12.379L17.523 9.45L20.452 11.14C21.438 11.71 21.438 13.049 20.452 13.618L17.523 15.308ZM3.338 1.353C3.125 1.426 3 1.639 3 1.884V22.116C3 22.361 3.125 22.574 3.338 22.647L12.905 12.379L3.338 1.353ZM14.07 11.232L4.654 1.214C4.85 1.109 5.093 1.109 5.289 1.214L15.307 7.025L14.07 11.232ZM14.07 13.526L15.307 17.733L5.289 23.544C5.093 23.649 4.85 23.649 4.654 23.544L14.07 13.526Z"/>
-                </svg>
+                <img src="https://cdn.simpleicons.org/googleplay/white" class="icon-img" alt="Google Play">
                 <div class="button-text-container">
-                    <span class="button-subtitle">Get ıt on</span>
+                    <span class="button-subtitle">Get it on</span>
                     <span class="button-text">Google Play</span>
                 </div>
             </a>
         </div>
         
-        <p id="detect-msg">İşte sizin için doğru adres!</p>
+        <p id="detect-msg" style="opacity: 0;">Şimdi indirin!</p>
     </div>
 
     <footer>&copy; 2026 EyesOn Network</footer>
@@ -105,9 +103,9 @@
         const androidLink = document.getElementById('android-link');
         const msg = document.getElementById('detect-msg');
         if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) { 
-            iosLink.classList.add('highlight'); msg.style.opacity = '1'; 
+            iosLink.classList.add('highlight'); msg.style.opacity = '1'; msg.innerText = "iOS için en uygun seçenek seçildi!";
         } else if (/android/i.test(userAgent)) { 
-            androidLink.classList.add('highlight'); msg.style.opacity = '1'; 
+            androidLink.classList.add('highlight'); msg.style.opacity = '1'; msg.innerText = "Android için en uygun seçenek seçildi!";
         }
     </script>
 </body>
