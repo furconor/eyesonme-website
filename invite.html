@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seni bir odaya davet ettim! - EyesOnMe</title>
+    
+    <!-- WhatsApp Preview Meta Tags -->
+    <meta property="og:title" content="EyesOnMe Oda Daveti">
+    <meta property="og:description" content="Hemen odaya katıl ve zirveye oyna!">
+    <meta property="og:image" content="https://eyesonme.space/assets/images/invite_card.png">
+    <meta property="og:url" content="https://eyesonme.space/invite.html">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="EyesOnMe Oda Daveti">
+    <meta name="twitter:description" content="Hemen odaya katıl ve zirveye oyna!">
+    <meta name="twitter:image" content="https://eyesonme.space/assets/images/invite_card.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #050505;
+            color: white;
+            font-family: 'Outfit', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        /* Background Glows */
+        .glow {
+            position: absolute;
+            width: 60vw;
+            height: 60vw;
+            filter: blur(100px);
+            z-index: -1;
+            opacity: 0.3;
+            border-radius: 50%;
+        }
+        .glow-1 { top: -10%; left: -10%; background: radial-gradient(circle, #FF3366 0%, transparent 70%); }
+        .glow-2 { bottom: -10%; right: -10%; background: radial-gradient(circle, #9933FF 0%, transparent 70%); }
+
+        .card {
+            width: 90%;
+            max-width: 400px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 32px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 40px 24px;
+            text-align: center;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.5);
+        }
+        .logo { width: 80px; height: 80px; border-radius: 18px; margin-bottom: 24px; box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
+        h1 { font-size: 26px; font-weight: 800; margin-bottom: 8px; letter-spacing: -0.5px; }
+        p { color: rgba(255,255,255,0.5); font-weight: 300; margin-bottom: 32px; font-size: 16px; }
+        .btn {
+            background: linear-gradient(135deg, #FF3366 0%, #9933FF 100%);
+            color: white;
+            padding: 18px 36px;
+            border-radius: 18px;
+            text-decoration: none;
+            font-weight: 700;
+            display: inline-block;
+            transition: all 0.3s;
+            box-shadow: 0 15px 30px rgba(255, 51, 102, 0.2);
+        }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 20px 40px rgba(255, 51, 102, 0.3); }
+        
+        .stores { margin-top: 32px; display: flex; gap: 12px; justify-content: center; }
+        .store-icon { width: 120px; opacity: 0.5; transition: opacity 0.3s; }
+        .store-icon:hover { opacity: 1; }
+
+        .footer { position: absolute; bottom: 30px; font-size: 12px; color: rgba(255,255,255,0.2); letter-spacing: 1px; }
+    </style>
+</head>
+<body>
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+
+    <div class="card">
+        <img src="assets/images/eye_logo.png" class="logo" alt="Logo" onerror="this.src='https://eyesonme.space/assets/images/eye_logo.png'">
+        <h1 id="room-name">Oda Daveti</h1>
+        <p>Seni harika bir yarışmaya davet ettim. Hemen katıl ve tarzını göster!</p>
+        <a href="#" id="deep-link" class="btn">UYGULAMADA AÇ</a>
+        
+        <div class="stores">
+             <a href="https://apps.apple.com/tr/app/eyesonme/id6759520834"><img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" class="store-icon" alt="App Store"></a>
+             <a href="https://play.google.com/store/apps/details?id=space.eyesonme.eyesonme"><img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" class="store-icon" alt="Play Store"></a>
+        </div>
+    </div>
+    
+    <div class="footer">EYESON NETWORK</div>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const roomId = params.get('roomid');
+        const roomName = params.get('name');
+        
+        if (roomName) {
+            document.title = roomName + " - EyesOnMe Davet";
+            document.getElementById('room-name').innerText = roomName;
+        }
+        
+        const deepLink = "io.raterush.app://room/" + (roomId || "");
+        document.getElementById('deep-link').href = deepLink;
+
+        // Auto redirect if mobile
+        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+        if (isMobile && roomId) {
+            setTimeout(() => {
+                window.location.href = deepLink;
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
